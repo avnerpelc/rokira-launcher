@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'none';">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rokira Launcher</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#07131e;color:#f7efd9;font-family:Georgia,serif;overflow:hidden}.hero{height:100vh;background:linear-gradient(90deg,rgba(5,16,27,.96) 0%,rgba(5,16,27,.72) 34%,rgba(5,16,27,.12) 75%),url('./background.png') center/cover}.top{height:86px;padding:16px 34px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,12,20,.72);border-bottom:1px solid #5f9ec0}.brand{display:flex;gap:14px;align-items:center}.brand img{height:58px;width:auto}.brand span{font-size:15px;letter-spacing:3px;color:#b9e9ff}.status{color:#8ef0c6;font:14px Arial,sans-serif}.content{padding:55px 0 0 54px;width:min(590px,58vw)}.eyebrow{color:#71d8ff;letter-spacing:4px;font:13px Arial,sans-serif;font-weight:bold}.content h1{font-size:50px;line-height:1;margin:14px 0;color:#fff5d7;text-shadow:0 3px 0 #172c43}.content>p{font:16px Arial,sans-serif;line-height:1.5;color:#d5e2e7}.cards{margin-top:18px;max-height:142px;overflow:auto}.card{background:rgba(8,20,31,.83);border:1px solid rgba(115,198,235,.42);border-radius:8px;padding:10px 14px;margin:8px 0}.tag{font:10px Arial,sans-serif;color:#79ddff;letter-spacing:2px}.card h3{margin:5px 0;font-size:18px}.card p{margin:0;font:12px Arial,sans-serif;line-height:1.4;color:#cfdee1}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:5px;padding:13px 18px;font:bold 14px Arial,sans-serif;cursor:pointer}.play{background:linear-gradient(#f8d778,#bd7b29);color:#18212a;box-shadow:0 0 18px #d8a73788}.discord{background:#263c62;color:#fff}.secondary{background:rgba(28,48,65,.92);color:#d9edf3;border:1px solid #5f9ec0}.disabled{background:#59616a!important;color:#c5cbd0!important;box-shadow:none!important;cursor:wait!important}.check{position:absolute;left:54px;right:54px;bottom:42px;min-height:52px;padding:11px 16px;border:1px solid rgba(115,198,235,.35);background:rgba(5,17,28,.9);border-radius:7px;font:13px Arial,sans-serif;color:#c9dbe2}.check.error{border-color:#a94d4d;color:#ffd0c8}.bar{height:6px;background:#263746;border-radius:4px;margin-top:8px;overflow:hidden}.bar div{height:100%;width:0;background:#e9b743;transition:width .2s}.footer{position:absolute;bottom:16px;left:54px;color:#9eb4bf;font:12px Arial,sans-serif}.small{font-size:11px;color:#9eb4bf;margin-top:7px}
+  </style>
+  <style>
+    .portal{margin-top:17px;width:100%;max-width:530px;overflow:hidden;border:1px solid rgba(113,216,255,.42);border-radius:9px;background:rgba(5,17,28,.84);box-shadow:0 12px 34px #0005}.tabs{display:flex;gap:4px;padding:6px;border-bottom:1px solid #35576b;background:#0b1c29}.tab{flex:1;padding:9px 7px;border:0;border-radius:5px;background:transparent;color:#9eb4bf;font:bold 10px Arial,sans-serif;letter-spacing:1.3px;cursor:pointer}.tab.active{background:linear-gradient(180deg,#264d66,#18364b);color:#eaf9ff}.tab-panel{height:124px;padding:12px 15px;overflow:hidden}.tab-panel[hidden]{display:none}.news-item{padding:3px 0 9px;border-bottom:1px solid #315065}.news-item:last-child{border:0}.news-item .tag{margin-bottom:4px}.news-item h3{font-size:16px;margin:0 0 4px;color:#fff2d2}.news-item p,.community-copy,.server-copy{font:12px/1.45 Arial,sans-serif;color:#c8d9e0;margin:0}.news-item + .news-item{padding-top:8px}.community-row,.server-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.community-row{height:100%}.community-copy{max-width:310px}.mini-button{border:1px solid #6ba5c1;border-radius:5px;background:#263c62;color:#fff;padding:9px 12px;font:bold 11px Arial,sans-serif;white-space:nowrap;cursor:pointer}.server-state{font:bold 14px Arial,sans-serif;color:#8ef0c6;margin-bottom:6px}.server-copy{color:#9fb8c4}
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <header class="top"><div class="brand"><img src="./logo.png" alt="Rokira"><span>RAGNAROK CLÁSSICO</span></div><div id="status" class="status" role="status">● Verificando servidor...</div></header>
+    <section class="content">
+      <div class="eyebrow">ROKIRA • PRÉ-RENEWAL • 1X</div>
+      <h1>O clássico voltou.<br><span style="color:#76dfff">A aventura é sua.</span></h1>
+      <p>Entre em Rune-Midgard, encontre sua guilda e viva um Ragnarok clássico feito para a comunidade brasileira.</p>
+      <section class="portal" aria-label="Painel Rokira">
+        <div class="tabs" role="tablist" aria-label="Informações do servidor">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="news">NOVIDADES</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="community">COMUNIDADE</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="server-panel">SERVIDOR</button>
+        </div>
+        <div id="news" class="tab-panel" role="tabpanel"></div>
+        <div id="community" class="tab-panel" role="tabpanel" hidden>
+          <div class="community-row"><p class="community-copy">Encontre sua guilda, acompanhe os avisos e converse com outros aventureiros no Discord oficial.</p><button id="discord-panel" class="mini-button">ENTRAR NO DISCORD ↗</button></div>
+        </div>
+        <div id="server-panel" class="tab-panel" role="tabpanel" hidden>
+          <div class="server-row"><div><div id="server-state" class="server-state">Verificando conexão...</div><p id="server-copy" class="server-copy">O launcher testa os serviços de login, personagens e mapas.</p></div><button id="server-retry" class="mini-button">VERIFICAR</button></div>
+        </div>
+      </section>
+      <div class="actions">
+        <button id="play" class="btn play disabled" disabled>▶ JOGAR</button>
+        <button id="select-client" class="btn secondary" hidden>SELECIONAR PASTA DO CLIENTE</button>
+        <button id="official" class="btn secondary" hidden>BAIXAR CLIENTE OFICIAL</button>
+        <button id="retry" class="btn secondary">VERIFICAR NOVAMENTE</button>
+        <button id="discord" class="btn discord">DISCORD</button>
+      </div>
+      <div id="hint" class="small"></div>
+    </section>
+    <div id="check" class="check"><span id="message">Preparando a checagem...</span><div class="bar"><div id="progress"></div></div></div>
+    <div class="footer">Rokira | Ragnarok Clássico • Launcher 1.1.0</div>
+  </main>
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const playButton = $('#play');
+    const selectButton = $('#select-client');
+    const officialButton = $('#official');
+    const retryButton = $('#retry');
+    const statusLabel = $('#status');
+    const message = $('#message');
+    const progress = $('#progress');
+    const checkBox = $('#check');
+    let checking = false;
+
+    function setMessage(text, error = false) {
+      message.textContent = text;
+      checkBox.classList.toggle('error', error);
+    }
+    function setProgress(value) { progress.style.width = `${Math.max(0, Math.min(100, value))}%`; }
+    function setPlayEnabled(enabled) {
+      playButton.disabled = !enabled;
+      playButton.classList.toggle('disabled', !enabled);
+      playButton.title = enabled ? 'Abrir o Rokira' : 'Aguarde a verificação e a atualização';
+    }
+    function showNews(items) {
+      const container = $('#news');
+      container.replaceChildren();
+      for (const item of (Array.isArray(items) ? items : []).slice(0, 2)) {
+        const card = document.createElement('article');
+        card.className = 'news-item';
+        const tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = item.tag || 'ROKIRA';
+        const title = document.createElement('h3'); title.textContent = item.title || '';
+        const body = document.createElement('p'); body.textContent = item.body || '';
+        card.append(tag, title, body); container.append(card);
+      }
+      if (!container.childElementCount) {
+        const empty = document.createElement('p');
+        empty.className = 'server-copy';
+        empty.textContent = 'As notícias do Rokira aparecerão aqui.';
+        container.append(empty);
+      }
+    }
+    function renderServer(server) {
+      const state = $('#server-state');
+      const detail = $('#server-copy');
+      state.textContent = server.online ? '● Servidor online' : '● Servidor offline';
+      state.style.color = server.online ? '#8ef0c6' : '#ff9b9b';
+      const labels = ['Login', 'Personagens', 'Mapas'];
+      detail.textContent = server.ports.map((item, index) => `${labels[index] || 'Serviço'} ${item.online ? '✓' : '×'}`).join('   ·   ');
+      statusLabel.textContent = server.online ? '● Servidor online' : '● Servidor offline';
+      statusLabel.style.color = server.online ? '#8ef0c6' : '#ff9b9b';
+    }
+
+    async function verify() {
+      if (checking) return;
+      checking = true;
+      setPlayEnabled(false);
+      selectButton.hidden = true;
+      officialButton.hidden = true;
+      retryButton.disabled = true;
+      setProgress(0);
+      setMessage('Consultando atualizações e verificando os arquivos...');
+      try {
+        const manifest = await window.rokira.getManifest();
+        const server = await window.rokira.serverStatus();
+        renderServer(server);
+        showNews(await window.rokira.news());
+
+        let files = await window.rokira.checkFiles();
+        let baseVersion = await window.rokira.getInstalledVersion('base');
+        if (!files.clientReady || baseVersion !== manifest.base.version) {
+          setMessage('Preparando o cliente base do jogo...');
+          await window.rokira.downloadUpdate('base', (state) => {
+            setProgress(state.percent);
+            setMessage(`Baixando o cliente base... ${state.percent}%`);
+          });
+          files = await window.rokira.checkFiles();
+          baseVersion = await window.rokira.getInstalledVersion('base');
+        }
+
+        if (!files.clientReady || baseVersion !== manifest.base.version) throw new Error('A instalação do cliente base não passou na verificação. Tente novamente.');
+        let patchVersion = await window.rokira.getInstalledVersion('patch');
+        if (patchVersion !== manifest.patch.version) {
+          setMessage('Aplicando as atualizações do Rokira...');
+          await window.rokira.downloadUpdate('patch', (state) => {
+            setProgress(state.percent);
+            setMessage(`Atualizando mapas, itens e arquivos do Rokira... ${state.percent}%`);
+          });
+          patchVersion = await window.rokira.getInstalledVersion('patch');
+        }
+        if (patchVersion !== manifest.patch.version) throw new Error('As atualizações do Rokira não passaram na verificação. Tente novamente.');
+        if (!files.officialReady) {
+          selectButton.hidden = false;
+          officialButton.hidden = false;
+          setMessage('Cliente Rokira atualizado. Selecione a pasta do Ragnarok oficial para concluir.');
+          setProgress(100);
+          return;
+        }
+        if (!server.online) {
+          setMessage('Arquivos conferidos. O servidor está indisponível; o botão Jogar ficará bloqueado até a conexão voltar.', true);
+          setProgress(100);
+          return;
+        }
+        setPlayEnabled(true);
+        setMessage(`Tudo certo — cliente ${manifest.base.version} e atualização ${manifest.patch.version}. O servidor está online.`);
+        setProgress(100);
+      } catch (error) {
+        statusLabel.textContent = '● Verificação pendente';
+        statusLabel.style.color = '#ffd27b';
+        setMessage(error.message || 'Não foi possível concluir a verificação. Confira sua conexão e tente novamente.', true);
+      } finally {
+        retryButton.disabled = false;
+        checking = false;
+      }
+    }
+
+    $('#retry').addEventListener('click', verify);
+    $('#server-retry').addEventListener('click', async () => {
+      try { renderServer(await window.rokira.serverStatus()); }
+      catch { $('#server-state').textContent = '● Não foi possível verificar'; }
+    });
+    document.querySelectorAll('[data-tab]').forEach((button) => button.addEventListener('click', () => {
+      document.querySelectorAll('[data-tab]').forEach((tab) => {
+        const active = tab === button;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
+      document.querySelectorAll('.tab-panel').forEach((panel) => { panel.hidden = panel.id !== button.dataset.tab; });
+    }));
+    $('#select-client').addEventListener('click', async () => {
+      const result = await window.rokira.selectClientFolder();
+      if (result.ok) await verify();
+      else if (!result.canceled) setMessage(result.error, true);
+    });
+    $('#official').addEventListener('click', () => window.rokira.openOfficialClient());
+    $('#discord').addEventListener('click', () => window.rokira.openDiscord());
+    $('#discord-panel').addEventListener('click', () => window.rokira.openDiscord());
+    $('#play').addEventListener('click', async () => {
+      setPlayEnabled(false);
+      const result = await window.rokira.play();
+      if (result.ok) setMessage('Abrindo o jogo...');
+      else { setMessage(result.error || 'Não foi possível abrir o jogo.', true); await verify(); }
+    });
+
+    window.rokira.news().then(showNews).catch(() => {});
+    verify();
+    setInterval(async () => {
+      if (checking) return;
+      try {
+        const server = await window.rokira.serverStatus();
+        renderServer(server);
+        if (!server.online) setPlayEnabled(false);
+        else if (!checking) await verify();
+      } catch { statusLabel.textContent = '● Verificação de servidor pendente'; }
+    }, 45000);
+  </script>
+</body>
+</html>

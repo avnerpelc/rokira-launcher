@@ -1,0 +1,7 @@
+{
+  "name": "rokira-launcher",
+  "productName": "Rokira Launcher",
+  "version": "1.0.0",
+  "main": "main.cjs",
+  "private": true
+}

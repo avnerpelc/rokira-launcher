@@ -1,0 +1,11 @@
+launcher/launcher-config.json
+launcher/dist/
+launcher/releases/
+*.env
+*.env.*
+*.pem
+*.key
+*.ppk
+*.p12
+*.pfx
+*.cnf

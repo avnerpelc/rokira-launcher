@@ -1,0 +1,20 @@
+{
+  "format": 2,
+  "server": "ENDERECO-PUBLICO-DO-SERVIDOR-DE-JOGO",
+  "ports": [6900, 6121, 5121],
+  "newsUrl": "https://SEU-DOMINIO-DE-ATUALIZACAO/rokira/news.json",
+  "base": {
+    "version": "1.0.0",
+    "contentPolicy": "rokira-base-v1",
+    "packageUrl": "https://SEU-DOMINIO-DE-ATUALIZACAO/rokira/base/Rokira-base-1.0.0.zip",
+    "size": 1,
+    "sha256": "PREENCHER_COM_SHA256_DE_64_CARACTERES"
+  },
+  "patch": {
+    "version": "1.0.0",
+    "contentPolicy": "rokira-patch-v1",
+    "packageUrl": "https://SEU-DOMINIO-DE-ATUALIZACAO/rokira/patch/Rokira-patch-1.0.0.zip",
+    "size": 1,
+    "sha256": "PREENCHER_COM_SHA256_DE_64_CARACTERES"
+  }
+}
