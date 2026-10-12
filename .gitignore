@@ -1,6 +1,8 @@
 launcher/launcher-config.json
 launcher/dist/
 launcher/releases/
+launcher/node_modules/
+.npm-cache/
 *.env
 *.env.*
 *.pem
