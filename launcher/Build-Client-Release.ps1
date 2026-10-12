@@ -16,9 +16,11 @@ if ((Test-Path -LiteralPath $zipPath) -or (Test-Path -LiteralPath $releasePath))
   throw "A saída já existe. Escolha uma pasta nova: $output"
 }
 if ($Channel -eq 'base') {
-  foreach ($relative in @('cliente-windows/Ragnarok Classico.exe','client-assets/index.html')) {
+  foreach ($relative in @('cliente-windows/Ragnarok Classico.exe','client-assets/index.html','client-version.json')) {
     if (-not (Test-Path -LiteralPath (Join-Path $source $relative) -PathType Leaf)) { throw "O cliente base não contém o arquivo necessário: $relative" }
   }
+  $clientMetadata = Get-Content -LiteralPath (Join-Path $source 'client-version.json') -Raw | ConvertFrom-Json
+  if ($clientMetadata.packetver -ne 20250402) { throw 'O executável do pacote base não confirma PACKETVER=20250402.' }
 }
 
 Add-Type -AssemblyName System.IO.Compression
@@ -26,7 +28,7 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 $fileStream = [System.IO.File]::Open($zipPath, [System.IO.FileMode]::CreateNew)
 $archive = [System.IO.Compression.ZipArchive]::new($fileStream, [System.IO.Compression.ZipArchiveMode]::Create, $false)
 $allowedFolders = if ($Channel -eq 'base') { @('cliente-windows', 'client-assets', 'client-browser', 'catalogo', 'localization') } else { @('patch', 'cliente-windows', 'client-assets', 'client-browser', 'catalogo', 'localization') }
-$rootFiles = if ($Channel -eq 'base') { @('Jogar.cmd', 'Jogar.ps1', 'clientinfo.xml') } else { @('clientinfo.xml') }
+$rootFiles = if ($Channel -eq 'base') { @('Jogar.cmd', 'Jogar.ps1', 'clientinfo.xml', 'client-version.json') } else { @('clientinfo.xml') }
 $excludedSegments = @('private', 'database', 'server', 'backup', 'backups', 'logs', 'log', 'downloads', 'accounts', 'account', 'contas', 'conta', 'secrets', 'secret', 'admin', 'administration', 'gm', 'game-master', 'ssh', 'keys', 'credentials')
 $added = 0
 
@@ -77,6 +79,7 @@ $release = [ordered]@{
   channel = $Channel
   version = $Version
   contentPolicy = "rokira-$Channel-v1"
+  packetver = if ($Channel -eq 'base') { 20250402 } else { $null }
   packageUrl = "https://SEU-DOMINIO-DE-ATUALIZACAO/rokira/$Channel/Rokira-$Channel-$Version.zip"
   sha256 = $sha
   size = $size

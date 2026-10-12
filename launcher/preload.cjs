@@ -3,7 +3,7 @@
 const { contextBridge, ipcRenderer, shell } = require('electron');
 
 contextBridge.exposeInMainWorld('rokira', {
-  version: '1.1.0',
+  version: '1.2.0',
   checkFiles: () => ipcRenderer.invoke('rokira:check-files'),
   getManifest: () => ipcRenderer.invoke('rokira:get-manifest'),
   getInstalledVersion: (channel) => ipcRenderer.invoke('rokira:get-installed-version', channel),

@@ -1,10 +1,12 @@
 {
   "format": 2,
+  "packetver": 20250402,
   "server": "ENDERECO-PUBLICO-DO-SERVIDOR-DE-JOGO",
   "ports": [6900, 6121, 5121],
   "newsUrl": "https://SEU-DOMINIO-DE-ATUALIZACAO/rokira/news.json",
   "base": {
     "version": "1.0.0",
+    "packetver": 20250402,
     "contentPolicy": "rokira-base-v1",
     "packageUrl": "https://SEU-DOMINIO-DE-ATUALIZACAO/rokira/base/Rokira-base-1.0.0.zip",
     "size": 1,

@@ -1,6 +1,8 @@
 # Rokira Launcher
 
-O launcher verifica o servidor, confere as versões e instala em sequência o cliente base e os patches do Rokira. Ele não libera **Jogar** se a instalação, a versão ou a conexão com o servidor falhar.
+O launcher 1.2.0 verifica o servidor, confere as versões e instala em sequência o cliente base e os patches do Rokira. Esta edição aceita somente `PACKETVER=20250402`: ela não libera **Jogar** se o manifesto, o pacote instalado ou a conexão não confirmarem essa versão.
+
+O launcher é a aplicação de atualização e inicialização; ele não contém nem recompila o executável proprietário do jogo. O pacote de cliente precisa ser montado com os arquivos legalmente obtidos pelo responsável do servidor, incluir `client-version.json` com `{"packetver":20250402}` e passar por homologação antes de ser publicado. O protocolo novo do servidor e o cliente precisam ser promovidos juntos.
 
 ## Distribuição recomendada
 
@@ -15,13 +17,15 @@ Não é necessário criar outro repositório para os binários. O `rokira-rag` p
 
 ## Manifesto de produção
 
-Use `manifest-v2.example.json` como modelo. O manifesto real deve ter `format: 2`, o host/portas públicas do jogo e objetos `base` e `patch`. Cada pacote precisa de versão, `contentPolicy`, URL HTTPS, tamanho exato e SHA-256. Copie os metadados gerados pelo build para os objetos correspondentes; nunca use o manifesto antigo de um único ZIP.
+Use `manifest-v2.example.json` como modelo. O manifesto real deve ter `format: 2`, `packetver: 20250402`, host/portas públicas do jogo e objetos `base` e `patch`. O objeto `base` também precisa de `packetver: 20250402`. Cada pacote precisa de versão, `contentPolicy`, URL HTTPS, tamanho exato e SHA-256. Copie os metadados gerados pelo build para os objetos correspondentes; nunca use o manifesto antigo de um único ZIP.
 
 As políticas aceitas são `rokira-base-v1` e `rokira-patch-v1`. A área de atualização deve entregar os arquivos por HTTPS e não pode redirecionar para HTTP. `server` é o endereço público de conexão do jogo, não o endereço administrativo da VPS.
 
 ## Gerar os pacotes
 
-`Build-Client-Release.ps1` cria um ZIP com caminhos permitidos e interrompe a geração se detectar arquivo de conta, `.env`, banco, logs, backups, chaves, acesso SSH, arquivo de GM/admin ou diretório administrativo. Para o pacote base, a origem deve conter `cliente-windows/Ragnarok Classico.exe` e `client-assets/index.html`. Para patches, use uma pasta de origem com somente os arquivos alterados, mantendo os caminhos relativos (`client-assets/`, `client-browser/`, `catalogo/`, `localization/`, `patch/` ou `cliente-windows/`). Revise a lista de arquivos do pacote antes de publicar.
+`Build-Client-Release.ps1` cria um ZIP com caminhos permitidos e interrompe a geração se detectar arquivo de conta, `.env`, banco, logs, backups, chaves, acesso SSH, arquivo de GM/admin ou diretório administrativo. Para o pacote base, a origem deve conter `cliente-windows/Ragnarok Classico.exe`, `client-assets/index.html` e `client-version.json` confirmando `20250402`. Para patches, use uma pasta de origem com somente os arquivos alterados, mantendo os caminhos relativos (`client-assets/`, `client-browser/`, `catalogo/`, `localization/`, `patch/` ou `cliente-windows/`). Revise a lista de arquivos do pacote antes de publicar.
+
+Rode `npm test` na pasta `launcher` antes de gerar uma distribuição. O construtor exige um runtime Electron e o endereço HTTPS real do manifesto; o repositório não contém binários do jogo ou runtime Electron.
 
 Depois de publicar os dois ZIPs e o manifesto, configure `launcher/launcher-config.json` com os endereços HTTPS reais e gere o launcher. Esse arquivo é ignorado pelo Git porque o endereço de distribuição é definido no ambiente de release.
 

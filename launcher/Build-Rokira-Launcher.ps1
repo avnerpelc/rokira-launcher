@@ -27,7 +27,7 @@ Get-ChildItem -LiteralPath $runtime -Force | Where-Object { $_.Name -notin @('Ra
 }
 New-Item -ItemType Directory -Path (Join-Path $output 'resources/app') -Force | Out-Null
 Copy-Item -LiteralPath $defaultApp -Destination (Join-Path $output 'resources/default_app.asar') -Force
-foreach ($name in @('main.cjs','preload.cjs','index.html','news.json','package.json','logo.png','background.png','Install-ClientPackage.ps1')) {
+foreach ($name in @('main.cjs','preload.cjs','protocol.cjs','index.html','news.json','package.json','logo.png','background.png','Install-ClientPackage.ps1')) {
   Copy-Item -LiteralPath (Join-Path $source $name) -Destination (Join-Path $output "resources/app/$name") -Force
 }
 Copy-Item -LiteralPath $runtimeExe -Destination (Join-Path $output 'Rokira Launcher.exe') -Force
